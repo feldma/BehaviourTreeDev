@@ -4,6 +4,12 @@
 
 #include "CoreMinimal.h"
 
+//BehaviorTree
+#include "BehaviorTree/BehaviorTree.h"
+#include "BehaviorTree/BehaviorTreeComponent.h"
+#include "BehaviorTree/BlackboardComponent.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
+
 //Perception
 #include "Perception/AISenseConfig.h"
 #include "Perception/AISense_Sight.h"
@@ -25,6 +31,7 @@ class BEHAVIOURTREEDEV_API ABaseAIController : public AAIController
 {
 	GENERATED_BODY()
 
+/* Attributes */
 public:
 
 	/* Blackboard data */
@@ -49,4 +56,17 @@ public:
 	TSubclassOf<UAISense> SightSense;
 
 	/* Blackboard keys */
+
+/* Methods */
+public:
+
+	ABaseAIController();
+
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaSeconds) override;
+	virtual void Possess(APawn *Pawn) override;
+
+	/* Perception */
+	UFUNCTION()
+	void SenseStuff(AActor *UpdatedActor, FAIStimulus Stimulus);
 };
